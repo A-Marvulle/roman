@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Conversor</title>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-12 p-2">
+        <div class="border rounded m-3 p-2">
+          <h1>Conversor Númeral -> Romano</h1>
+          <input type="text" id="numero" placeholder="Digite uma número" class="mt-sm-2 w-100 m-1">
+          <button onclick="convertToRoman()" class="btn btn-outline-success mt-sm-2 w-100 m-1">Converter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="result" class="row justify-content-center"></div>
+
+  <script>
+    function convertToRoman() {
+      let numElement = document.getElementById('numero');
+      let num = parseInt(numElement.value);
+      
+      if (num <= 0 || num > 3999 || isNaN(num)) {
+        alert("Invalido, digite um NÚMERO positivo menor que 3999.");
+        return;
+      }
+
+      const romanNumerals = [
+        { value: 1000, numeral: 'M' },
+        { value: 900, numeral: 'CM' },
+        { value: 500, numeral: 'D' },
+        { value: 400, numeral: 'CD' },
+        { value: 100, numeral: 'C' },
+        { value: 90, numeral: 'XC' },
+        { value: 50, numeral: 'L' },
+        { value: 40, numeral: 'XL' },
+        { value: 10, numeral: 'X' },
+        { value: 9, numeral: 'IX' },
+        { value: 5, numeral: 'V' },
+        { value: 4, numeral: 'IV' },
+        { value: 1, numeral: 'I' }
+      ];
+
+      let result = '';
+
+      for (const numeral of romanNumerals) {
+        while (num >= numeral.value) {
+          result += numeral.numeral;
+          num -= numeral.value;
+        }
+      }
+
+      const resultElement = document.getElementById('result');
+      resultElement.textContent = result;
+    }
+  </script>
+
+</body>
+</html>
